@@ -1,0 +1,126 @@
+/* ============================================================
+   LIVING HOME COLOMBIA — main.css
+   Overrides and component styles specific to this page.
+   Loaded after aluna.css.
+   ============================================================ */
+
+/* Hero intro video (sources live in /img/video-intro/) */
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0; transition: opacity 1.2s ease; }
+.hero-video.is-playing { opacity: 0.42; }
+.hero-fallback { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+.hero-fallback::after { font-size: 11px; opacity: 0.55; }
+
+/* ===== WhatsApp — floating button ===== */
+.wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 200; display: inline-flex; align-items: center; gap: 0; height: 60px; padding: 0 17px; border-radius: 999px; background: #25D366; color: #fff; box-shadow: 0 10px 28px rgba(0,0,0,0.28); transition: gap .35s var(--ease), padding .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease); overflow: hidden; }
+.wa-float svg { flex: none; }
+.wa-float .wa-float-label { max-width: 0; opacity: 0; white-space: nowrap; font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .01em; transition: max-width .35s var(--ease), opacity .3s var(--ease), margin .35s var(--ease); }
+.wa-float:hover { gap: 11px; transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,0.34); }
+.wa-float:hover .wa-float-label { max-width: 220px; opacity: 1; }
+@media (max-width: 640px) {
+  .wa-float { right: 16px; bottom: 16px; height: 56px; padding: 0 13px; }
+  .wa-float:hover .wa-float-label { max-width: 0; opacity: 0; }
+}
+
+/* ===== WhatsApp — inline button inside the final CTA ===== */
+.wa-inline { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 13px 22px; border-radius: 999px; background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.55); color: #25D366; font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .02em; transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease); }
+.wa-inline svg { flex: none; }
+.wa-inline:hover { background: #25D366; color: #fff; transform: translateY(-2px); }
+
+/* ===== BRAND LOGO — image mark sizing ===== */
+.brand .mark { width: auto; height: 38px; }
+.footer .brand-block .mark { width: auto; height: 66px; margin-bottom: 18px; }
+.footer .brand-block .wordmark { line-height: 1.12; }
+.form-done .mark { width: auto; height: 60px; }
+
+/* ===== NEARBY — lighter section (desktop + mobile) =====
+   Trimmed to fewer, stronger places so the section doesn't feel crowded.
+   The "within 20 minutes" band now holds a centered pair instead of a
+   3-column row with an empty slot. */
+.near-grid.pair { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-inline: 0; }
+@media (max-width: 920px) { .near-grid.pair { grid-template-columns: repeat(2, 1fr); max-width: none; } }
+@media (max-width: 600px) { .near-grid.pair { grid-template-columns: 1fr; } }
+
+/* ===== REVIEWS — balanced grid instead of lopsided masonry =====
+   A real grid keeps the cards in clean, evenly-centered rows. */
+.reviews-grid { columns: auto; column-count: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 26px); align-items: stretch; }
+.reviews-grid .review { margin-bottom: 0; display: flex; flex-direction: column; }
+.reviews-grid .review .src { margin-top: auto; padding-top: 18px; }
+@media (max-width: 920px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+/* ===== PROPERTY SPECS — 6-up grid (adds lot + built area) ===== */
+.prop-specs.six { grid-template-columns: repeat(3, 1fr); }
+.prop-specs .s .n .us { font-size: 0.42em; color: var(--on-dark-mut); letter-spacing: 0.02em; margin-left: 4px; }
+@media (max-width: 760px) { .prop-specs.six { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .prop-specs.six { grid-template-columns: 1fr; } }
+
+/* ===== ECONOMY — natural-capital / birds band =====
+   Ties the region's environmental value and birdwatching tourism to the
+   property itself. Sits below the economy stats on the dark band. */
+.eco-nature { margin-top: clamp(40px, 5vh, 64px); padding-top: clamp(36px, 4vh, 52px); border-top: 1px solid var(--hair-dark); display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
+.eco-nature .en-num { font-family: var(--serif); font-weight: 500; font-size: clamp(54px, 6.6vw, 94px); line-height: 0.84; color: var(--gold); }
+.eco-nature .en-num .u { font-size: 0.4em; vertical-align: super; color: var(--on-dark-mut); }
+.eco-nature .en-tag { font-size: 13px; line-height: 1.55; color: var(--on-dark-mut); margin-top: 18px; max-width: 30ch; }
+.eco-nature .en-right h3 { margin: 14px 0 0; color: var(--on-dark); }
+.eco-nature .en-right p.body { margin-top: 16px; max-width: 56ch; color: rgba(236,229,215,0.78); }
+@media (max-width: 760px) { .eco-nature { grid-template-columns: 1fr; gap: 22px; } }
+
+/* ===== MOBILE TUNING =====
+   Phone view was very long with large gaps; the top nav, the carousel
+   counter and the "nearby" lists also felt busy. These overrides give the
+   phone a calmer, lighter layout: a decluttered header, no slide counter,
+   fewer nearby cards/reviews and a tighter vertical rhythm.
+   Desktop is completely untouched. */
+@media (max-width: 640px) {
+
+  /* Decluttered header */
+  .nav { padding-left: 16px; padding-right: 16px; }
+  .nav.solid { padding-top: 11px; padding-bottom: 11px; }
+  .brand { gap: 9px; }
+  .brand .mark { width: auto; height: 30px; }
+  .brand .wordmark { font-size: 17px; letter-spacing: 0.26em; padding-left: 1px; }
+  .brand .wordmark .sub { display: none; }
+  .nav-links { gap: 10px; }
+  .nav-links .enquire { padding: 8px 13px; font-size: 9.5px; letter-spacing: 0.1em; }
+  .lang-trigger { padding: 6px 8px; font-size: 10px; gap: 5px; }
+
+  /* No "01 / 06" slide counter on phones */
+  .pf-count { display: none; }
+
+  /* Lighter vertical rhythm */
+  .section { padding-top: clamp(42px, 6vh, 58px); padding-bottom: clamp(42px, 6vh, 58px); }
+  .sec-head { margin-bottom: 28px; }
+  .manifesto .statement { margin: 22px auto; }
+  .closer { margin-top: 30px; }
+
+  /* Condense the stacked argument / offering blocks */
+  .args { margin-top: 28px; }
+  .arg { padding: 24px 20px; }
+  .offer-grid { margin-top: 28px; gap: 28px; }
+
+  /* Ease headline sizes down on phones */
+  .display { font-size: clamp(36px, 10.5vw, 50px); line-height: 1.0; }
+  .h-xl { font-size: clamp(28px, 7.4vw, 38px); }
+  .h-lg { font-size: clamp(26px, 6.6vw, 34px); }
+
+  /* Nearby: tighter cards, no review-count numbers */
+  .near-band { margin: 30px 0 14px; }
+  .near { padding: 22px 20px 20px; }
+  .dist-table { margin-top: 28px; }
+  .near .rating .rev { display: none; }
+
+  /* Show the three strongest reviews, hide the rest */
+  .reviews-grid .review:nth-child(n+4) { display: none; }
+  .reviews-note { margin-top: 26px; }
+
+  /* Hero — calmer, purpose-built phone layout */
+  .hero { min-height: 92svh; padding-top: clamp(104px, 16vh, 150px); padding-bottom: 96px; }
+  .hero .eyebrow { margin-bottom: 18px; font-size: 10px; letter-spacing: 0.18em; }
+  .hero .eyebrow::before { width: 22px; }
+  .hero h1 { max-width: 12ch; margin-bottom: 20px; }
+  .hero-sub { font-size: 15.5px; line-height: 1.62; max-width: 36ch; color: rgba(236,229,215,0.82); }
+  .hero-inner > div:last-child { margin-top: 28px !important; gap: 12px !important; flex-direction: column; align-items: stretch; }
+  .hero-inner .btn { width: 100%; justify-content: center; }
+  .hero-foot { bottom: 18px; }
+  .hero-foot > span:first-child { display: none; }
+}
