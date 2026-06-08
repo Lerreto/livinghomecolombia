@@ -81,12 +81,12 @@
   });
 
   /* ---- shared WhatsApp helpers (friendly, localized) ---- */
-  var WA_NUMBER = "573337208118";
+  var WA_NUMBER = "573152693434";
   var WA_INTRO = {
-    es: "¡Hola! 👋 Vi la página de Living Home Colombia sobre la casa de campo centenaria en Ginebra (Finca San Antonio) y me encantaría recibir más información.",
-    en: "Hi there! 👋 I saw Living Home Colombia's page about the century-old country home in Ginebra (Finca San Antonio) and I'd love to get more information.",
-    de: "Hallo! 👋 Ich habe die Seite von Living Home Colombia über das hundertjährige Landhaus in Ginebra (Finca San Antonio) gesehen und würde gern mehr erfahren.",
-    fr: "Bonjour ! 👋 J'ai vu la page de Living Home Colombia sur la maison de campagne centenaire à Ginebra (Finca San Antonio) et j'aimerais beaucoup en savoir plus."
+    es: "¡Hola! 👋 Vengo por parte de Living Home Colombia. Vi la página sobre la casa de campo centenaria en Ginebra (Finca San Antonio) y me encantaría recibir más información.",
+    en: "Hi there! 👋 I'm reaching out through Living Home Colombia. I saw your page about the century-old country home in Ginebra (Finca San Antonio) and I'd love to get more information.",
+    de: "Hallo! 👋 Ich melde mich über Living Home Colombia. Ich habe die Seite über das hundertjährige Landhaus in Ginebra (Finca San Antonio) gesehen und würde gern mehr erfahren.",
+    fr: "Bonjour ! 👋 Je vous contacte de la part de Living Home Colombia. J'ai vu la page sur la maison de campagne centenaire à Ginebra (Finca San Antonio) et j'aimerais beaucoup en savoir plus."
   };
   function waLang() { return (window.alunaI18n && window.alunaI18n.current()) || "es"; }
   function waURL(text) { return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text); }

@@ -281,20 +281,52 @@
   /* ---- helpers ---- */
   function t(key, lang) { var e = T[key]; return e ? (e[lang] || e.en) : null; }
 
+  /* Country (ISO-3166 alpha-2) → site language. Anything not listed
+     falls back to English, so English is always the safe default. */
+  var COUNTRY_LANG = {
+    // German-speaking
+    DE: "de", AT: "de", LI: "de",
+    // French-speaking
+    FR: "fr", MC: "fr", LU: "fr",
+    // Spanish-speaking
+    ES: "es", MX: "es", CO: "es", AR: "es", CL: "es", PE: "es", VE: "es",
+    EC: "es", GT: "es", CU: "es", BO: "es", DO: "es", HN: "es", PY: "es",
+    SV: "es", NI: "es", CR: "es", PA: "es", UY: "es", PR: "es", GQ: "es"
+  };
+
   function detect() {
+    // Only honour an explicit, saved user choice. Otherwise start in
+    // English and let geoDetect() refine it from the visitor's country.
     var saved = localStorage.getItem("aluna-lang");
     if (saved && LANGS.indexOf(saved) !== -1) return saved;
-    var nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-    for (var i = 0; i < LANGS.length; i++) if (nav.indexOf(LANGS[i]) === 0) return LANGS[i];
     return "en";
+  }
+
+  /* Look up the visitor's country by IP and switch language accordingly.
+     Runs only when the user hasn't picked a language manually; defaults to
+     English on any failure. Replace this with a server-set value (e.g. a
+     <html data-country> attribute filled in by your VPS) for no flash. */
+  function geoDetect() {
+    if (localStorage.getItem("aluna-lang")) return; // user already chose
+    fetch("https://ipapi.co/json/")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (localStorage.getItem("aluna-lang")) return; // chose while loading
+        var cc = (d && d.country_code ? d.country_code : "").toUpperCase();
+        var lang = COUNTRY_LANG[cc] || "en";
+        if (LANGS.indexOf(lang) !== -1 && lang !== currentLang) apply(lang, false);
+      })
+      .catch(function () { /* stay in English */ });
   }
 
   var currentLang = "en";
 
-  function apply(lang) {
+  function apply(lang, persist) {
     currentLang = lang;
     document.documentElement.lang = lang;
-    localStorage.setItem("aluna-lang", lang);
+    // Only remember the language when the user picked it on purpose, so the
+    // auto/geo detection doesn't lock English-by-default visitors in.
+    if (persist) localStorage.setItem("aluna-lang", lang);
 
     // selector state
     var trigCode = document.querySelector(".lang-trigger .lt-code");
@@ -347,7 +379,7 @@
       item.className = "lang-item";
       item.setAttribute("data-lang", l);
       item.innerHTML = '<span class="li-badge">' + CODES[l] + '</span><span class="li-name">' + NAMES[l] + "</span>";
-      item.addEventListener("click", function (ev) { ev.preventDefault(); ev.stopPropagation(); apply(l); });
+      item.addEventListener("click", function (ev) { ev.preventDefault(); ev.stopPropagation(); apply(l, true); });
       menu.appendChild(item);
     });
 
@@ -365,7 +397,8 @@
   }
 
   buildSelector();
-  apply(detect());
+  apply(detect(), false);
+  geoDetect();
 
   window.alunaI18n = { apply: apply, current: function () { return currentLang; }, t: t };
 })();
