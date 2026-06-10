@@ -1,0 +1,23 @@
+{
+  "name": "Living Home Colombia",
+  "short_name": "LHC",
+  "description": "A new life in Colombia's eternal spring. Private hacienda in Ginebra, Valle del Cauca.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0A0A0A",
+  "background_color": "#0A0A0A",
+  "icons": [
+    {
+      "src": "/img/brand/favicon/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/img/brand/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
