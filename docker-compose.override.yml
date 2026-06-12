@@ -1,0 +1,15 @@
+# Configuración LOCAL (se carga sola con "docker compose up").
+# Aquí nginx solo sirve el sitio estático.
+
+services:
+  web:
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8080:80"        # http://localhost:8080
+
+  crm:
+    environment:
+      ESPOCRM_SITE_URL: "http://localhost:8081"
+    ports:
+      - "8081:80"        # http://localhost:8081

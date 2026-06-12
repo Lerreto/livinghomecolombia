@@ -1,0 +1,15 @@
+name = "livinghome-lead"
+main = "worker.js"
+compatibility_date = "2026-06-01"
+
+# Variables NO secretas (visibles en el dashboard, está bien).
+[vars]
+ALLOWED_ORIGIN = "https://livinghomecolombia.com,https://www.livinghomecolombia.com,http://localhost:8080"
+MIN_SCORE = "0.5"
+
+# Los SECRETOS no van aquí. Se cargan una sola vez con:
+#   wrangler secret put RECAPTCHA_SECRET
+#   wrangler secret put ESPO_LEAD_CAPTURE_URL
+#
+# Para 'wrangler dev' (local) esos dos valores se leen del archivo .dev.vars
+# (ver .dev.vars.example).
