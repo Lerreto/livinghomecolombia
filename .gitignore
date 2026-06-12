@@ -1,3 +1,2 @@
-.env
-worker/.dev.vars
+web/worker/.dev.vars
 certbot/
